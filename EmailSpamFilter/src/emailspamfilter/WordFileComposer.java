@@ -11,5 +11,19 @@ package emailspamfilter;
  * @author Mitchell
  */
 public class WordFileComposer {
+    public static void readFile() {
+        
+    }
     
+    public static void removeCapitals() {
+        
+    }
+    
+    public static void spaceIndividualWords() {
+        
+    }
+    
+    public static void writeFile() {
+        
+    }
 }
