@@ -12,24 +12,36 @@ package emailspamfilter;
  */
 import java.util.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 public class WordFileComposer {
 
-    public static void convertFile() {
-	String s = console.next();
+    public static void processFile(File file) {          
 	String word = null;
-        BufferedReader br = new BufferedReader(new FileReader(s));
-	PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(s)));
-	StringTokenizer st = new StringTokenizer(br.read());
-	while((word = br.readLine()) != null){
-		word = removeCapitals(word);
-		pw.println(word);
-	}
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader(file));
+            PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file)));
+            StringTokenizer st = new StringTokenizer(br.read());
+            while((word = br.readLine()) != null){
+                    word = removeCapitals(word);
+                    word = removePunctuation(word);
+                    pw.println(word);
+            }
 	pw.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(WordFileComposer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
 
     }
     
     public static String removeCapitals(String word) {
         return word.toLowerCase();
+    }
+    
+    public static String removePunctuation(String word) {
+        return word.replaceAll("[^a-zA-Z ]", "");
     }
     
     

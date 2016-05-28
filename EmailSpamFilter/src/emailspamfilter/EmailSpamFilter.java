@@ -37,17 +37,14 @@ public class EmailSpamFilter {
         scanner.nextLine();
         if (operationSelector == 1) {
             System.out.print("Please specify the filepath: ");
-
+            NaiveBayesEngine.runTest(new File(scanner.nextLine()));
         } else if (operationSelector == 2) {
-            System.out.print("Please specify all the URL components with spaces in between: ");
-
+            System.out.print("Please specify the filepath of the message.  A copy will be created in the system's own directories.");
+            WordFileComposer.processFile(new File(scanner.nextLine()));
         } else {
             System.out.println("Invalid input.  Please answer with \"1\" or \"2\"");
         }
     }
-    
-    public static void consoleInitial() {
-        
-    }
+
     
 }
