@@ -24,14 +24,27 @@ public class NaiveBayesEngine {
     
     public static void classifierInitial(File file) {
         String currentQuery = "";
+        double matchWordIndex = 0;
+        double positiveScore = 1;
+        double negativeScore = 1;
         try {
             Scanner scanner = new Scanner(file);
             while ((currentQuery = scanner.next()) != null) {
-                
+                if (WordBucket.getWordIndex(currentQuery) != 1) {
+                    positiveScore = positiveScore * WordBucket.getProbabilityWordGood(currentQuery);
+                    negativeScore = negativeScore * WordBucket.getProbabilityWordBad(currentQuery);
+                }
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(NaiveBayesEngine.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        if (positiveScore > negativeScore) {
+            System.out.println("Not Spam");
+        } else if (negativeScore > positiveScore) {
+            System.out.println("Spam");
+        } else {
+            System.out.println("Neutral");
+        }
     }
 }

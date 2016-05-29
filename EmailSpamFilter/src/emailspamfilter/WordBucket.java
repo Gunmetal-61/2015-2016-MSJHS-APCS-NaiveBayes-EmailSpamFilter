@@ -92,10 +92,10 @@ public class WordBucket{
 	* contains the word.
 	*/
 	public static double getProbabilityWordGood(String word){
-		if (getWordIndex(word) == -1){
-			return 1; 
-		}
-		return getWordGood(word)/(getWordGood(word)+getWordBad(word));
+            if (getWordIndex(word) == -1){
+                return 1; 
+            }
+            return getWordGood(word)/(getWordGood(word)+getWordBad(word));
 	}
 
 	/*
@@ -103,10 +103,10 @@ public class WordBucket{
 	* contains the word.
 	*/
 	public static double getProbabilityWordBad(String word){
-				if (getWordIndex(word) == -1){
-			return 1; 
-		}
-		return getWordBad(word)/(getWordGood(word)+getWordBad(word));
+            if (getWordIndex(word) == -1){
+                return 1; 
+            }
+            return getWordBad(word)/(getWordGood(word)+getWordBad(word));
 	}
 
 	/*
