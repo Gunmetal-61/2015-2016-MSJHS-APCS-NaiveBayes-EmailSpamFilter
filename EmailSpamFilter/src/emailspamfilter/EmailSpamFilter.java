@@ -31,6 +31,9 @@ public class EmailSpamFilter {
         operationSelector();
     }
     
+    /**
+     * Method that simply prints name of the program and program description.
+     */
     public static void openingSequencePrompt() {
         System.out.println("EmailSpamFilter.java");//name of program printed first
         System.out.println("APCS semester 2 project. This project implements a self-written version of the\n" +//description of program functions
@@ -38,6 +41,11 @@ public class EmailSpamFilter {
                 "or not spam through single word probability.");
     }
     
+    /**
+     * Method that contains the console for choosing which of two principal operations
+     * to do: test a message for spam based on pre-classified data, or add more
+     * pre-classified messages to the ground truth data.
+     */
     public static void operationSelector() {
         System.out.println();
         System.out.println("Choose an Operation Option:");//two functions
@@ -56,6 +64,10 @@ public class EmailSpamFilter {
         }
     }
     
+    /**
+     * Selected operation in operationSelector that adds more pre-classified 
+     * messages to the ground truth data.
+     */
     public static void operation1() {
         System.out.print("Please specify the filepath of the txt file message: ");
 	File f = new File(scanner.nextLine());
@@ -63,10 +75,16 @@ public class EmailSpamFilter {
         NaiveBayesEngine.runTest(new File(scanner.nextLine()), null);
     }
     
+    /**
+     * Selected operation in operationSelector that tests a message for spam.
+     * Also contains a console selection of its own that allows the user to determine
+     * 
+     */
     public static void operation2() {
+        File addedMessageFile = null;
         if (operation2PromptToggle == 0) {
             System.out.print("Please specify the filepath of the txt file message.  A copy will be created in the system's own directories.");
-            File addedMessageFile = new File(scanner.nextLine());
+            addedMessageFile = new File(scanner.nextLine());
             operation2PromptToggle = 1;
         }
     
@@ -75,9 +93,11 @@ public class EmailSpamFilter {
                 + "\t2) Not Spam?");
         int operationSelector = scanner.nextInt();
         if (operationSelector == 1) {
-            WordFileComposer.processNewMessageFile(new File(scanner.nextLine()), "SPAM");
+            WordFileComposer.cleanMessagesForAnalysis(addedMessageFile, "SPAM");
+            //add wordBucket word analysis and registering here.
         } else if (operationSelector == 2) {
-            WordFileComposer.processNewMessageFile(new File(scanner.nextLine()), "HAM");
+            WordFileComposer.cleanMessagesForAnalysis(addedMessageFile, "HAM");
+            //add wordBucket word analysis and registering here.
         } else {
             System.out.println("Invalid input.  Please answer with \"1\" or \"2\"");
             operation2();
