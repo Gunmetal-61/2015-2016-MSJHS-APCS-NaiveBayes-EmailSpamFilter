@@ -100,6 +100,8 @@ public class WordBucket{
 	public static double getProbabilityWordGood(String word){
             if (getWordIndex(word) == -1){
                 return 1; 
+            }else if(getWordGood(word) == 0){
+            	return (0.01)/(getWordGood(word)+getWordBad(word));
             }
             return getWordGood(word)/(getWordGood(word)+getWordBad(word));
 	}
@@ -111,6 +113,8 @@ public class WordBucket{
 	public static double getProbabilityWordBad(String word){
             if (getWordIndex(word) == -1){
                 return 1; 
+            }else if(getWordBad(word) == 0){
+            	return (0.01)/(getWordGood(word)+getWordBad(word));
             }
             return getWordBad(word)/(getWordGood(word)+getWordBad(word));
 	}
