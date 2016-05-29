@@ -16,7 +16,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 public class WordFileComposer {
 
-    public static void processFile(File file) {          
+    /**
+     * Method designed to fulfill the function of option #2 in EmailSpamFilter.main.  
+     * Will simultaneously add a selected message in a txt file as ground truth 
+     * and classify its contents.        
+     * 
+     * @param file
+     * @param messageType
+     */
+    public static void processNewMessageFile(File file, String messageType) {//
 	String word = null;
         BufferedReader br;
         try {

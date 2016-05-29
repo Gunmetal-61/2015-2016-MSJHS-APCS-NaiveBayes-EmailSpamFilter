@@ -17,7 +17,8 @@ import java.util.logging.Logger;
  * @author Mitchell
  */
 public class NaiveBayesEngine {
-    public static void runTest(File file) {
+    
+    public static void runTest(File file) {//wrapper method for classifierInitial.  Meant to be THE method to call when one wants to see if a message is spam or not
         classifierInitial(file);
     }
     
