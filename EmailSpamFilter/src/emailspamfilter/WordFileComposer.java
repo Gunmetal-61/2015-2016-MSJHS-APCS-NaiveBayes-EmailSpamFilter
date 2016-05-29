@@ -24,8 +24,11 @@ public class WordFileComposer {
      * @param file
      * @param messageType
      */
-    public static void processNewMessageFile(File file, String messageType) {//
-	String word = null;
+    public static void cleanMessagesForAnalysis(File file, String messageType) {//
+	
+        
+        
+        String word = null;
         BufferedReader br;
         try {
             br = new BufferedReader(new FileReader(file));
@@ -46,6 +49,8 @@ public class WordFileComposer {
             }
 	pw.close();
         } catch (FileNotFoundException ex) {
+            Logger.getLogger(WordFileComposer.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
             Logger.getLogger(WordFileComposer.class.getName()).log(Level.SEVERE, null, ex);
         }
 
