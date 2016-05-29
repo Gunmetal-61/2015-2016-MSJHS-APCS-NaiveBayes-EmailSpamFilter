@@ -1,3 +1,5 @@
+package emailspamfilter;
+
 //saving word bucket as arraylist of strings
 import java.io.*;
 import java.util.*;
@@ -6,13 +8,13 @@ import java.util.logging.Logger;
 
 public class WordBucket{
 		
-	public ArrayList<String> arr;
+	public static ArrayList<String> arr;
 
 	public WordBucket(){
 	//initiates blank arraylist
 	}
 
-	public void getArr() throws FileNotFoundException{
+	public static void getArr() throws FileNotFoundException{
 	//read in arraylist from a file
 		File f = new File("wordbuckettext.txt");
 		Scanner scanf = new Scanner(f);
@@ -23,7 +25,7 @@ public class WordBucket{
 		}
 	}
 
-	public void writeArr(){
+	public static void writeArr(){
 	//writes arraylist out 
         PrintWriter writer = null;
         try {
@@ -44,7 +46,7 @@ public class WordBucket{
 	}
 
 
-	public void processWord(String word, Boolean spam){
+	public static void processWord(String word, Boolean spam){
 	//either adds or incremenets
 		if (getWordIndex(word) == -1){
 		 	arr.addWord(word);
@@ -58,36 +60,36 @@ public class WordBucket{
 
 	}
 
-	public void incrementWordGood(String word){
+	public static void incrementWordGood(String word){
 
 	}
 
-	public void incrementWordBad(String word){
+	public static void incrementWordBad(String word){
 
 	}
 
-	public void addWord(String word){
+	public static void addWord(String word){
 
 	}
 
-	public double getProbabilityWordGood(String word){
+	public static double getProbabilityWordGood(String word){
 		return arr.getWordGood(word)/(arr.getWordGood(word)+arr.getWordBad(word));
 
 	}
 
-	public double getWordGood(String word){
+	public static double getWordGood(String word){
 
 	}
 
-	public double getWordBad(String word){
+	public static double getWordBad(String word){
 
 	}
 
-	public int getWordIndex(String word){
+	public static int getWordIndex(String word){
 		for (int i = 0; i<arr.size(); i++){
 			String str = arr.get(i);
 			List<String> elementArray = Arrays.asList(str.split("\\s*,\\s*"));
-			if (elementArray[0].equals(word)){
+			if (elementArray.get(0).equals(word)){
 				return i; 
 			}
 		}
