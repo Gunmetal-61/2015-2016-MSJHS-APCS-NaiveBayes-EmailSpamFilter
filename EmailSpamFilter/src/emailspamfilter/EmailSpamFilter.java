@@ -70,9 +70,9 @@ public class EmailSpamFilter {
      */
     public static void operation1() {
         System.out.print("Please specify the filepath of the txt file message: ");
-	File f = new File(scanner.nextLine());
-	WordFileComposer.processNewMessageFile(f);
-        NaiveBayesEngine.runTest(new File(scanner.nextLine()), null);
+	File testFile = new File(scanner.nextLine());
+	WordFileComposer.cleanMessagesForAnalysis(testFile, "TEST");
+        NaiveBayesEngine.runTest(testFile);
     }
     
     /**
