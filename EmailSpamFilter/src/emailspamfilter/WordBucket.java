@@ -53,29 +53,31 @@ public class WordBucket{
 	*/
 	public static void processWord(String word, Boolean spam){
 		if (getWordIndex(word) == -1){
-		 	arr.addWord(word);
+		 	addWord(word);
 		}else{
-			if (spam){
-				arr.incrementWordBad(word);
-			}else{
-				arr.incrementWordGood(word);
-			}
+			incrementWord(word,spam);
 		}
 
 	}
 
 	/*
-	* This method increments the word's count of appearances in spam emails. 
+	* This method increments the word's count of appearances in spam or nonspam emails. 
 	*/
-	public static void incrementWordGood(String word){
-
-	}
-
-	/*
-	* This method increments the word's count of appearances in not spam emails. 
-	*/
-	public static void incrementWordBad(String word){
-
+	public static void incrementWord(String word, Boolean spam){
+		int index = getWordIndex(word);
+		String str = arr.get(index);
+		List<String> elementArray = Arrays.asList(str.split("\\s*,\\s*"));
+		if (spam){
+			int badNum = Integer.parseInt(elementArray.get(2));
+			badNum ++;
+			String newstr = elementArray.get(0) + " " + elementArray.get(1) + " " + badNum;
+			arr.set(index, newstr);
+		}else{
+			int goodNum = Integer.parseInt(elementArray.get(1));
+			goodNum ++;
+			String newstr = elementArray.get(0) + " " + goodNum + " " + elementArray.get(2); 
+			arr.set(index, newstr);
+		}
 	}
 
 	/*
@@ -86,26 +88,47 @@ public class WordBucket{
 	}
 
 	/*
-	* This method returns the probability that the messages is good, given that it 
+	* This method returns the probability that the message is good, given that it 
 	* contains the word.
 	*/
 	public static double getProbabilityWordGood(String word){
-		return arr.getWordGood(word)/(arr.getWordGood(word)+arr.getWordBad(word));
+		if (getWordIndex(word) == -1){
+			return 1; 
+		}
+		return getWordGood(word)/(getWordGood(word)+getWordBad(word));
+	}
 
+	/*
+	* This method returns the probability that the message is bad, given that it 
+	* contains the word.
+	*/
+	public static double getProbabilityWordBad(String word){
+				if (getWordIndex(word) == -1){
+			return 1; 
+		}
+		return getWordBad(word)/(getWordGood(word)+getWordBad(word));
 	}
 
 	/*
 	* This method returns the number of nonspam emails the word appears in.
 	*/
 	public static double getWordGood(String word){
-
+		int index = getWordIndex(word);
+		String str = arr.get(index);
+		List<String> elementArray = Arrays.asList(str.split("\\s*,\\s*"));
+		int temp = Integer.parseInt(elementArray.get(1));
+		return temp; 
 	}
 
 	/*
 	* This method returns the number of spam emails the word appears in.
 	*/
 	public static double getWordBad(String word){
-
+		int index = getWordIndex(word);
+		String str = arr.get(index);
+		List<String> elementArray = Arrays.asList(str.split("\\s*,\\s*"));
+		int temp = Integer.parseInt(elementArray.get(2));
+		return temp; 
 	}
 
 
