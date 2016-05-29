@@ -109,17 +109,10 @@ public class WordBucket{
 	* contains the word.
 	*/
 	public static double getProbabilityWordBad(String word){
-<<<<<<< Updated upstream
             if (getWordIndex(word) == -1){
                 return 1; 
             }
             return getWordBad(word)/(getWordGood(word)+getWordBad(word));
-=======
-		if (getWordIndex(word) == -1){
-			return 1; 
-		}
-		return getWordBad(word)/(getWordGood(word)+getWordBad(word));
->>>>>>> Stashed changes
 	}
 
 	/*
