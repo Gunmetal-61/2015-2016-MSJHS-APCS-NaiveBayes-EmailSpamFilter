@@ -14,7 +14,11 @@ public class WordBucket{
 	//read in arraylist from a file
 		File f = new File("wordbuckettext.txt");
 		Scanner scanf = new Scanner(f);
-		for 
+		int i = 0;
+		while (scanf.hasNext()){
+			arr.set(i,scanf.next());
+			i++;
+		}
 	}
 
 	public void writeArr(){
@@ -26,10 +30,27 @@ public class WordBucket{
 
 	}
 
-	public void increment(){
+
+	public void processWord(String word, Boolean spam){
+	//either adds or incremenets
 
 	}
 
+	public void incrementWordGood(String word){
+
+	}
+
+	public void incrementWordBad(String word){
+
+	}
+
+	public void addWorld(String word){
+
+	}
+
+	public double getPercentWord(String word){
+
+	}
 
 
 }
