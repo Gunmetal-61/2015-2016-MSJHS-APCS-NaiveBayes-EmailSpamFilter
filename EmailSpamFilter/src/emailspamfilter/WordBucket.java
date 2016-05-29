@@ -1,6 +1,8 @@
 //saving word bucket as arraylist of strings
 import java.io.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class WordBucket{
 		
@@ -22,10 +24,18 @@ public class WordBucket{
 	}
 
 	public void writeArr(){
-	//write out arryList from a file
-		PrintWriter writer = new PrintWriter("wordbuckettext.txt", "UTF-8");
-		writer.println("hello");
-		writer.close();
+            PrintWriter writer = null;
+            try {
+                writer = new PrintWriter("wordbuckettext.txt", "UTF-8");
+                writer.println("hello");
+                writer.close();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(WordBucket.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(WordBucket.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                writer.close();
+            }
 
 
 	}
