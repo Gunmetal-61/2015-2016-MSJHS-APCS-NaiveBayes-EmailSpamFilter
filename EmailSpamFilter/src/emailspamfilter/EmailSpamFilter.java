@@ -58,7 +58,9 @@ public class EmailSpamFilter {
     
     public static void operation1() {
         System.out.print("Please specify the filepath of the txt file message: ");
-        NaiveBayesEngine.runTest(new File(scanner.nextLine()));
+	File f = new File(scanner.nextLine());
+	WordFileComposer.processNewMessageFile(f);
+        NaiveBayesEngine.runTest(new File(scanner.nextLine()), null);
     }
     
     public static void operation2() {
@@ -67,7 +69,7 @@ public class EmailSpamFilter {
             File addedMessageFile = new File(scanner.nextLine());
             operation2PromptToggle = 1;
         }
-        
+    
         System.out.println("Is this message:");//two functions
         System.out.println("\t1) Spam?\n"
                 + "\t2) Not Spam?");

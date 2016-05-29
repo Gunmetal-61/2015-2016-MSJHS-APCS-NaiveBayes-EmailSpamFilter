@@ -34,6 +34,14 @@ public class WordFileComposer {
             while((word = br.readLine()) != null){
                     word = removeCapitals(word);
                     word = removePunctuation(word);
+		    if(messageType != null){
+	            	if (messageType.equals("SPAM")){
+		    		WordBucket.processWord(word, true);
+			}
+		   	else if(messageType.equals("HAM")){
+				WordBucket.processWord(word, false);
+		   	}
+		    }
                     pw.println(word);
             }
 	pw.close();
@@ -52,5 +60,6 @@ public class WordFileComposer {
         return word.replaceAll("[^a-zA-Z ]", "");
     }
     
-    
+	
+	
 }
