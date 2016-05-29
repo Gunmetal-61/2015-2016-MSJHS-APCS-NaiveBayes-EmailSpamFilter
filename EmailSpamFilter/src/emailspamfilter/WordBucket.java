@@ -44,8 +44,12 @@ public class WordBucket{
 	}
 
 
+	/*
+	* Processes a word by updating the arrayList; if the word is already in the word bucket, 
+	* word's count is incremented based on whether the message is reported as spam or not spam.
+	* If the word is not in the word bucket, a separate entry is added to the arrayList. 
+	*/
 	public void processWord(String word, Boolean spam){
-	//either adds or incremenets
 		if (getWordIndex(word) == -1){
 		 	arr.addWord(word);
 		}else{
@@ -58,31 +62,55 @@ public class WordBucket{
 
 	}
 
+	/*
+	* This method increments the word's count of appearances in spam emails. 
+	*/
 	public void incrementWordGood(String word){
 
 	}
 
+	/*
+	* This method increments the word's count of appearances in not spam emails. 
+	*/
 	public void incrementWordBad(String word){
 
 	}
 
+	/*
+	* This method adds a separate entry into the arrayList for a new word. 
+	*/
 	public void addWord(String word){
 
 	}
 
+	/*
+	* This method returns the probability that the messages is good, given that it 
+	* contains the word.
+	*/
 	public double getProbabilityWordGood(String word){
 		return arr.getWordGood(word)/(arr.getWordGood(word)+arr.getWordBad(word));
 
 	}
 
+	/*
+	* This method returns the number of nonspam emails the word appears in.
+	*/
 	public double getWordGood(String word){
 
 	}
 
+	/*
+	* This method returns the number of spam emails the word appears in.
+	*/
 	public double getWordBad(String word){
 
 	}
 
+
+	/*
+	* This method finds the word in the ArrayList and returns the index of the word.
+	* If the word is not found, the index is returned as -1.
+	*/
 	public int getWordIndex(String word){
 		for (int i = 0; i<arr.size(); i++){
 			String str = arr.get(i);
