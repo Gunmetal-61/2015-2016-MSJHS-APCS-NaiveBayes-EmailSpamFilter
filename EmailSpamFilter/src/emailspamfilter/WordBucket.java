@@ -9,7 +9,7 @@ public class WordBucket{
 	public ArrayList<String> arr;
 
 	public WordBucket(){
-	//initiates blank array 
+	//initiates blank arraylist
 	}
 
 	public void getArr() throws FileNotFoundException{
@@ -24,18 +24,21 @@ public class WordBucket{
 	}
 
 	public void writeArr(){
-            PrintWriter writer = null;
-            try {
-                writer = new PrintWriter("wordbuckettext.txt", "UTF-8");
-                writer.println("hello");
-                writer.close();
+	//writes arraylist out 
+        PrintWriter writer = null;
+        try {
+            writer = new PrintWriter("wordbuckettext.txt", "UTF-8");
+            for (int i = 0; i<arr.size(); i++){
+                writer.println(arr.get(i));
+        	}
+            writer.close();
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(WordBucket.class.getName()).log(Level.SEVERE, null, ex);
             } catch (UnsupportedEncodingException ex) {
                 Logger.getLogger(WordBucket.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
                 writer.close();
-            }
+        }
 
 
 	}
@@ -43,6 +46,15 @@ public class WordBucket{
 
 	public void processWord(String word, Boolean spam){
 	//either adds or incremenets
+		if (getWordIndex(word) == -1){
+		 	arr.addWord(word);
+		}else{
+			if (spam){
+				arr.incrementWordBad(word);
+			}else{
+				arr.incrementWordGood(word);
+			}
+		}
 
 	}
 
@@ -54,13 +66,36 @@ public class WordBucket{
 
 	}
 
-	public void addWorld(String word){
+	public void addWord(String word){
 
 	}
 
-	public double getPercentWord(String word){
+	public double getProbabilityWordGood(String word){
+		return arr.getWordGood(word)/(arr.getWordGood(word)+arr.getWordBad(word));
 
 	}
 
+	public double getWordGood(String word){
+
+	}
+
+	public double getWordBad(String word){
+
+	}
+
+	public int getWordIndex(String word){
+		for (int i = 0; i<arr.size(); i++){
+			String str = arr.get(i);
+			List<String> elementArray = Arrays.asList(str.split("\\s*,\\s*"));
+			if (elementArray[0].equals(word)){
+				return i; 
+			}
+		}
+		return -1;
+	}
+
+	public void sortArr(){
+		Collections.sort(arr);
+	}
 
 }
