@@ -53,7 +53,7 @@ public class WordBucket{
 	*/
 	public static void processWord(String word, Boolean spam){
 		if (getWordIndex(word) == -1){
-		 	addWord(word);
+		 	addWord(word, spam);
 		}else{
 			incrementWord(word,spam);
 		}
@@ -83,8 +83,14 @@ public class WordBucket{
 	/*
 	* This method adds a separate entry into the arrayList for a new word. 
 	*/
-	public static void addWord(String word){
-
+	public static void addWord(String word, Boolean spam){
+		String newstr = "";
+		if (spam){
+			newstr += word + " 0 1";
+		} else{
+			newstr += word + " 1 0";
+		}
+		arr.set(arr.size(), newstr);
 	}
 
 	/*
@@ -103,10 +109,17 @@ public class WordBucket{
 	* contains the word.
 	*/
 	public static double getProbabilityWordBad(String word){
+<<<<<<< Updated upstream
             if (getWordIndex(word) == -1){
                 return 1; 
             }
             return getWordBad(word)/(getWordGood(word)+getWordBad(word));
+=======
+		if (getWordIndex(word) == -1){
+			return 1; 
+		}
+		return getWordBad(word)/(getWordGood(word)+getWordBad(word));
+>>>>>>> Stashed changes
 	}
 
 	/*
@@ -114,6 +127,9 @@ public class WordBucket{
 	*/
 	public static double getWordGood(String word){
 		int index = getWordIndex(word);
+		if (index == -1){
+			return 0; 
+		}
 		String str = arr.get(index);
 		List<String> elementArray = Arrays.asList(str.split("\\s*,\\s*"));
 		int temp = Integer.parseInt(elementArray.get(1));
@@ -125,6 +141,9 @@ public class WordBucket{
 	*/
 	public static double getWordBad(String word){
 		int index = getWordIndex(word);
+		if (index == -1){
+			return 0; 
+		}
 		String str = arr.get(index);
 		List<String> elementArray = Arrays.asList(str.split("\\s*,\\s*"));
 		int temp = Integer.parseInt(elementArray.get(2));
