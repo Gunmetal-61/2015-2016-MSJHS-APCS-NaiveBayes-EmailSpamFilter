@@ -143,6 +143,18 @@ public class WordBucket{
 		return temp; 
 	}
 
+	/* 
+	* This method allows the client to directly set the good and bad counts for a word. 
+	*/
+	public static void setWordCounts(String word, int good, int bad){
+		String str = word + " " + good + " " + bad; 
+		if (getWordIndex(word) == -1){
+			arr.add(str);
+		}else{
+			int index = getWordIndex(word); 
+			arr.set(index, str);
+		}
+	}
 
 	/*
 	* This method finds the word in the ArrayList and returns the index of the word.
