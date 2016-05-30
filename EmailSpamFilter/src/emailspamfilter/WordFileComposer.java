@@ -33,8 +33,8 @@ public class WordFileComposer {
         try {
             br = new BufferedReader(new FileReader(file));
             PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file)));
-            StringTokenizer st = new StringTokenizer(br.read());
-            while((word = br.readLine()) != null){
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            while((word = st.nextToken()) != null){
                     word = removeCapitals(word);
                     word = removePunctuation(word);
 		    if(messageType != null){
