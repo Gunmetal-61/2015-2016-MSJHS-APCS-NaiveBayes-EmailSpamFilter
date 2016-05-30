@@ -29,12 +29,12 @@ public class WordFileComposer {
         
         
         String word = null;
-        BufferedReader br;
+        Scanner sc;
         try {
-            br = new BufferedReader(new FileReader(file));
-            PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file)));
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            while((word = st.nextToken()) != null){
+            sc = new Scanner(file);
+            bw = new BufferedWriter(new FileWriter(file)));
+            while(sc.hasNext()){
+		    word = sc.next();
                     word = removeCapitals(word);
                     word = removePunctuation(word);
 		    if(messageType != null){
@@ -45,9 +45,9 @@ public class WordFileComposer {
 				WordBucket.processWord(word, false);
 		   	}
 		    }
-                    pw.println(word);
+                    bw.write(word);
             }
-	pw.close();
+	bw.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(WordFileComposer.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
