@@ -14,7 +14,11 @@ public class WordBucket{
 	//initiates blank arraylist
 	}
 
-	public static void getArr() throws FileNotFoundException{
+	public static List<String> getArr() {
+            return arr;
+        }
+        
+        public static void readFileArr() throws FileNotFoundException{
 	//read in arraylist from a file
 		File f = new File("wordbuckettext.txt");
 		Scanner scanf = new Scanner(f);
@@ -25,7 +29,7 @@ public class WordBucket{
 		}
 	}
 
-	public static void writeArr() throws IOException{
+	public static void writeArr() {
 	//writes arraylist out 
         BufferedWriter writer = null;
         File f = new File("wordbuckettext.txt");
@@ -43,7 +47,11 @@ public class WordBucket{
             } catch (IOException ex) {
                 Logger.getLogger(WordBucket.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
-                writer.close();
+                try {
+                    writer.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(WordBucket.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
 
