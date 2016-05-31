@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 public class WordBucket{
 		
-	public static ArrayList<String> arr;
+	public static List<String> arr = new ArrayList<>();
 
 	public WordBucket(){
 	//initiates blank arraylist
@@ -25,18 +25,22 @@ public class WordBucket{
 		}
 	}
 
-	public static void writeArr(){
+	public static void writeArr() throws IOException{
 	//writes arraylist out 
-        PrintWriter writer = null;
+        BufferedWriter writer = null;
+        File f = new File("wordbuckettext.txt");
         try {
-            writer = new PrintWriter("wordbuckettext.txt", "UTF-8");
+            writer = new BufferedWriter(new FileWriter(f));
             for (int i = 0; i<arr.size(); i++){
-                writer.println(arr.get(i));
+                System.out.println("ghfoiogihowertoihgoihwet");
+                writer.write(arr.get(i));
         	}
             writer.close();
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(WordBucket.class.getName()).log(Level.SEVERE, null, ex);
             } catch (UnsupportedEncodingException ex) {
+                Logger.getLogger(WordBucket.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
                 Logger.getLogger(WordBucket.class.getName()).log(Level.SEVERE, null, ex);
             } finally {
                 writer.close();
@@ -90,7 +94,7 @@ public class WordBucket{
 		} else{
 			newstr += word + " 1 0";
 		}
-		arr.set(arr.size(), newstr);
+		arr.add(newstr);
 	}
 
 	/*

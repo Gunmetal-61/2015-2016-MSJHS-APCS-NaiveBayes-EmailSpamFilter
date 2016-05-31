@@ -30,9 +30,11 @@ public class WordFileComposer {
         
         String word = null;
         Scanner sc;
+        BufferedWriter bw;
+        File fileB = new File(file.getName().replaceFirst("[.][^.]+$", "") + "B.txt");
         try {
             sc = new Scanner(file);
-            bw = new BufferedWriter(new FileWriter(file)));
+            bw = new BufferedWriter(new FileWriter(fileB));
             while(sc.hasNext()){
 		    word = sc.next();
                     word = removeCapitals(word);
@@ -45,7 +47,7 @@ public class WordFileComposer {
 				WordBucket.processWord(word, false);
 		   	}
 		    }
-                    bw.write(word);
+                    bw.write(word + " ");
             }
 	bw.close();
         } catch (FileNotFoundException ex) {

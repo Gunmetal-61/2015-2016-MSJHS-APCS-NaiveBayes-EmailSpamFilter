@@ -1,0 +1,10 @@
+Dear user,
+the management of mikesdomain.org mailing system wants to
+let you know that, Some of our clients complained about the
+spam (negative e-mail content) outgoing from your e-mail
+account. Probably, you have been infected by a proxy-relay
+trojan server. In order to keep your computer safe, follow
+the instructions. Pay attention on attached file. In order
+to read the attach you have to use the following password:
+88446. Cheers,
+The mikesdomain.org team http://www.mikesdomain.org
