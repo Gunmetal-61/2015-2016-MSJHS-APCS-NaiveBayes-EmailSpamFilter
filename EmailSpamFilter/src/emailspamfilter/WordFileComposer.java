@@ -32,24 +32,32 @@ public class WordFileComposer {
         Scanner sc;
         BufferedWriter bw;
         File fileB = new File(file.getName().replaceFirst("[.][^.]+$", "") + "B.txt");
+	String[] del = {"I", "the", "and", "a", "my", "me", "their"};
+	boolean b;
         try {
             sc = new Scanner(file);
             bw = new BufferedWriter(new FileWriter(fileB));
             while(sc.hasNext()){
+		    b = true;
 		    word = sc.next();
-                    word = removeCapitals(word);
+		    word = removeCapitals(word);
                     word = removePunctuation(word);
-		    if(messageType != null){
+		    for(int i = 0, i < del.length; i++){
+		    	if (word.equals(del[i])){
+				b = false;
+			}
+		    }
+		    if(messageType != null && b){
 	            	if (messageType.equals("SPAM")){
 		    		WordBucket.processWord(word, true);
 			}
 		   	else if(messageType.equals("HAM")){
 				WordBucket.processWord(word, false);
 		   	}
+		    	bw.write(word + " ");
 		    }
-                    bw.write(word + " ");
             }
-	bw.close();
+	    bw.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(WordFileComposer.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
