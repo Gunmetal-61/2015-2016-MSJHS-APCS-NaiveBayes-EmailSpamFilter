@@ -32,7 +32,8 @@ public class WordFileComposer {
         Scanner sc;
         BufferedWriter bw;
         File fileB = new File(file.getName().replaceFirst("[.][^.]+$", "") + "B.txt");
-	String[] del = {"I", "the", "and", "a", "my", "me", "their"};
+	//relatively neutral common words
+	String[] del = {"the","be","to","of","and","a","in","that","have","it","for"};
 	boolean b;
         try {
             sc = new Scanner(file);
