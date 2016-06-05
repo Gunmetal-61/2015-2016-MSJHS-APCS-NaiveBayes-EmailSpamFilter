@@ -1,0 +1,32 @@
+Mitchell, Catherine, Chris,
+
+I just took a look at your presentation.  A couple suggestions for improvements.  Please forward
+this to Chris as I don't have his email address.
+
+1. On slide 3, provide an example of how naive-bayes work and how the conditional probability
+    is calculated, which will help the audience understand how this machine learning algorithm
+    works.  The kind of example that I gave in my tutorial slide would suffice.
+
+2. Using O notation, explain the computational complexity of the naive bayes algorithm.  Discuss
+    how your algorithm will scale to process more data.  What dimensions can data grow, which
+    impacts processing time?  Refer to 13.2 of your book.
+
+3. What is the accuracy of your classifier?  How did you test the accuracy of your classifier?
+    Was it via n-fold cross validation or some other means?  Need to discuss these.
+
+4. Expand on slide 11 to explain the shortcomings of the filter that you have built, and what
+    could be done to improve it.
+
+    A hint is that email text is only one set of attributes (or features) for machine learning.  Email
+    contains many other attributes, which are mostly metadata.  Examples include Subject,
+    Author (from), Recipients (to), Reply-to Address, etc... etc...  If an email comes from a
+    colleague within the same company, would it more/less likely to be spam?  What if the 
+    message comes from a public email service (e.g. Yahoo Mail) that anyone can sign up
+    anonymously?
+
+Your project is looking good.  This is the kind of project that college juniors in CS would do.
+Make sure your audience (esp. your teacher) understands this.
+
+Feel free to ask me questions.
+
+Mr. Wu
