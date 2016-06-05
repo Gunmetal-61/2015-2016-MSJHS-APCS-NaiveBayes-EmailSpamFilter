@@ -24,14 +24,21 @@ public class WordFileComposer {
      * @param file
      * @param messageType
      */
-    public static void cleanMessagesForAnalysis(File file, String messageType) {//
-	
+    public static void cleanMessagesForAnalysis(File file, String messageType) {
         
-        
+
         String word = null;
         Scanner sc;
         BufferedWriter bw;
-        File fileB = new File(file.getName().replaceFirst("[.][^.]+$", "") + "B.txt");
+        File fileB = null;
+        if (messageType.equals("SPAM")) {
+            fileB = new File(".\\src\\emailspamfilter\\spammessages\\" + file.getName().replaceFirst("[.][^.]+$", "") + "B.txt");
+        } else if (messageType.equals("HAM")) {
+            fileB = new File(".\\src\\emailspamfilter\\hammessages\\" + file.getName().replaceFirst("[.][^.]+$", "") + "B.txt");
+        } else if (messageType.equals("TEST")) {
+            fileB = new File(".\\src\\emailspamfilter\\testmessages\\" + file.getName().replaceFirst("[.][^.]+$", "") + "B.txt");
+        }
+        
         try {
             sc = new Scanner(file);
             bw = new BufferedWriter(new FileWriter(fileB));
@@ -55,7 +62,16 @@ public class WordFileComposer {
         } catch (IOException ex) {
             Logger.getLogger(WordFileComposer.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
+        if (messageType.equals("SPAM")) {
+            WordBucket.writeArr();
+        } else if (messageType.equals("HAM")) {
+            WordBucket.writeArr();
+        } else if (messageType.equals("TEST")) {
+            
+        }
+        
+        
 
     }
     

@@ -18,26 +18,38 @@ public class WordBucket{
             return arr;
         }
         
-        public static void readFileArr() throws FileNotFoundException{
+        public static void readFileArr() {
 	//read in arraylist from a file
-		File f = new File("wordbuckettext.txt");
-		Scanner scanf = new Scanner(f);
-		int i = 0;
+            File f = new File(".\\src\\emailspamfilter\\internal\\wordbuckettext.txt");
+            Scanner scanf;
+            String test = "";
+            try {
+                scanf = new Scanner(f);
+                int i = 0;
 		while (scanf.hasNext()){
-			arr.set(i,scanf.next());
+                        test = scanf.nextLine();
+                        arr.add(test);
+                        //arr.add(scanf.nextLine());
 			i++;
 		}
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(WordBucket.class.getName()).log(Level.SEVERE, null, ex);
+            }
 	}
 
 	public static void writeArr() {
 	//writes arraylist out 
+        File f = new File(".\\src\\emailspamfilter\\internal\\wordbuckettext.txt");
+        PrintWriter pWriter = null;
         BufferedWriter writer = null;
-        File f = new File("wordbuckettext.txt");
         try {
+            pWriter = new PrintWriter(f);
+            pWriter.print("");
+            pWriter.close();
             writer = new BufferedWriter(new FileWriter(f));
             for (int i = 0; i<arr.size(); i++){
-                System.out.println("ghfoiogihowertoihgoihwet");
                 writer.write(arr.get(i));
+                writer.newLine();
         	}
             writer.close();
             } catch (FileNotFoundException ex) {
@@ -67,7 +79,7 @@ public class WordBucket{
 		if (getWordIndex(word) == -1){
 		 	addWord(word, spam);
 		}else{
-			incrementWord(word,spam);
+			incrementWord(word, spam);
 		}
 
 	}
@@ -78,7 +90,7 @@ public class WordBucket{
 	public static void incrementWord(String word, Boolean spam){
 		int index = getWordIndex(word);
 		String str = arr.get(index);
-		List<String> elementArray = Arrays.asList(str.split("\\s*,\\s*"));
+		List<String> elementArray = Arrays.asList(str.split("\\s+"));
 		if (spam){
 			int badNum = Integer.parseInt(elementArray.get(2));
 			badNum ++;
@@ -140,7 +152,7 @@ public class WordBucket{
 			return 0; 
 		}
 		String str = arr.get(index);
-		List<String> elementArray = Arrays.asList(str.split("\\s*,\\s*"));
+		List<String> elementArray = Arrays.asList(str.split("\\s+"));
 		int temp = Integer.parseInt(elementArray.get(1));
 		return temp; 
 	}
@@ -154,7 +166,7 @@ public class WordBucket{
 			return 0; 
 		}
 		String str = arr.get(index);
-		List<String> elementArray = Arrays.asList(str.split("\\s*,\\s*"));
+		List<String> elementArray = Arrays.asList(str.split("\\s+"));
 		int temp = Integer.parseInt(elementArray.get(2));
 		return temp; 
 	}
@@ -179,9 +191,9 @@ public class WordBucket{
 	public static int getWordIndex(String word){
 		for (int i = 0; i<arr.size(); i++){
 			String str = arr.get(i);
-			List<String> elementArray = Arrays.asList(str.split("\\s*,\\s*"));
-			if (elementArray.get(0).equals(word)){
-				return i; 
+			List<String> elementArray = Arrays.asList(str.split("\\s+"));
+                        if (elementArray.get(0).equals(word)){
+                            return i; 
 			}
 		}
 		return -1;

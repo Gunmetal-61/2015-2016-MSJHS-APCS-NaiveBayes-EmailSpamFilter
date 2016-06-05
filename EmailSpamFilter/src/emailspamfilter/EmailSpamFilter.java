@@ -27,6 +27,7 @@ public class EmailSpamFilter {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        WordBucket.readFileArr();
         openingSequencePrompt();
         operationSelector();
     }
@@ -69,7 +70,7 @@ public class EmailSpamFilter {
      * messages to the ground truth data.
      */
     public static void operation1() {
-        System.out.print("Please specify the filepath of the txt file message: ");
+        System.out.println("Please specify the filepath of the txt file message: ");
 	File testFile = new File(scanner.nextLine());
 	WordFileComposer.cleanMessagesForAnalysis(testFile, "TEST");
         NaiveBayesEngine.runTest(testFile);
@@ -83,7 +84,7 @@ public class EmailSpamFilter {
     public static void operation2() {
         File addedMessageFile = null;
         if (operation2PromptToggle == 0) {
-            System.out.print("Please specify the filepath of the txt file message.  A copy will be created in the system's own directories.");
+            System.out.println("Please specify the filepath of the txt file message.  A copy will be created in the system's own directories.");
             addedMessageFile = new File(scanner.nextLine());
             operation2PromptToggle = 1;
         }

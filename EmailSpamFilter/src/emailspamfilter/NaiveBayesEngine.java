@@ -29,7 +29,8 @@ public class NaiveBayesEngine {
         double negativeScore = 1;
         try {
             Scanner scanner = new Scanner(file);
-            while ((currentQuery = scanner.next()) != null) {
+            while (scanner.hasNext() == true) {
+                currentQuery = scanner.next();
                 if (WordBucket.getWordIndex(currentQuery) != 1) {
                     positiveScore = positiveScore * WordBucket.getProbabilityWordGood(currentQuery);
                     negativeScore = negativeScore * WordBucket.getProbabilityWordBad(currentQuery);
@@ -37,12 +38,17 @@ public class NaiveBayesEngine {
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(NaiveBayesEngine.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
+        
+        System.out.println();
+        System.out.println("Positive Score Probability: " + positiveScore);
+        System.out.println("Negative Score Probability: " + negativeScore);
+        System.out.println();
         
         if (positiveScore > negativeScore) {
-            System.out.println("Not Spam");
+            System.out.println("Likely Not Spam");
         } else if (negativeScore > positiveScore) {
-            System.out.println("Spam");
+            System.out.println("Likely Spam");
         } else {
             System.out.println("Neutral");
         }
