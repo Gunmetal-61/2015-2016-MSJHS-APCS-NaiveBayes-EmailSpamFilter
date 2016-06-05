@@ -29,19 +29,19 @@ public class WordFileComposer {
 
         String word = null;
         Scanner sc;
-        BufferedWriter bw;
-        File fileB = null;
-        if (messageType.equals("SPAM")) {
-            fileB = new File(".\\src\\emailspamfilter\\spammessages\\" + file.getName().replaceFirst("[.][^.]+$", "") + "B.txt");
-        } else if (messageType.equals("HAM")) {
-            fileB = new File(".\\src\\emailspamfilter\\hammessages\\" + file.getName().replaceFirst("[.][^.]+$", "") + "B.txt");
-        } else if (messageType.equals("TEST")) {
-            fileB = new File(".\\src\\emailspamfilter\\testmessages\\" + file.getName().replaceFirst("[.][^.]+$", "") + "B.txt");
-        }
+//        BufferedWriter bw;
+//        File fileB = null;
+//        if (messageType.equals("SPAM")) {
+//            fileB = new File(".\\src\\emailspamfilter\\spammessages\\" + file.getName().replaceFirst("[.][^.]+$", "") + "B.txt");
+//        } else if (messageType.equals("HAM")) {
+//            fileB = new File(".\\src\\emailspamfilter\\hammessages\\" + file.getName().replaceFirst("[.][^.]+$", "") + "B.txt");
+//        } else if (messageType.equals("TEST")) {
+//            fileB = new File(".\\src\\emailspamfilter\\testmessages\\" + file.getName().replaceFirst("[.][^.]+$", "") + "B.txt");
+//        }
         
         try {
             sc = new Scanner(file);
-            bw = new BufferedWriter(new FileWriter(fileB));
+//            bw = new BufferedWriter(new FileWriter(fileB));
             while(sc.hasNext()){
 		    word = sc.next();
                     word = removeCapitals(word);
@@ -54,9 +54,9 @@ public class WordFileComposer {
 				WordBucket.processWord(word, false);
 		   	}
 		    }
-                    bw.write(word + " ");
+//                    bw.write(word + " ");
             }
-	bw.close();
+//	bw.close();
         } catch (FileNotFoundException ex) {
             Logger.getLogger(WordFileComposer.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
