@@ -26,10 +26,10 @@ public class WordBucket{
     public static List<String> arr = new ArrayList<>();//ArrayList which holds all known words and frequency of occurences, both in spam and ham, while the program runs for classes to access.
         
     /**
-    * 
+    * initiates blank arraylist
     */
     public WordBucket(){
-    //initiates blank arraylist
+        
     }
     
     /**
@@ -52,10 +52,10 @@ public class WordBucket{
             scanf = new Scanner(f);
             int i = 0;
             while (scanf.hasNext()){
-                    test = scanf.nextLine();
-                    arr.add(test);
-                    //arr.add(scanf.nextLine());
-                    i++;
+                test = scanf.nextLine();
+                arr.add(test);
+                //arr.add(scanf.nextLine());
+                i++;
             }
         } catch (FileNotFoundException ex) {
             Logger.getLogger(WordBucket.class.getName()).log(Level.SEVERE, null, ex);
@@ -95,10 +95,8 @@ public class WordBucket{
                 writer.close();
             } catch (IOException ex) {
                 Logger.getLogger(WordBucket.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-    }
-
-
     }
 
 
@@ -108,32 +106,31 @@ public class WordBucket{
     * If the word is not in the word bucket, a separate entry is added to the arrayList. 
     */
     public static void processWord(String word, Boolean spam){
-            if (getWordIndex(word) == -1){
-                    addWord(word, spam);
-            }else{
-                    incrementWord(word, spam);
-            }
-
+        if (getWordIndex(word) == -1){
+            addWord(word, spam);
+        }else{
+            incrementWord(word, spam);
+        }
     }
 
     /*
     * This method increments the word's count of appearances in spam or nonspam emails. 
     */
     public static void incrementWord(String word, Boolean spam){
-            int index = getWordIndex(word);
-            String str = arr.get(index);
-            List<String> elementArray = Arrays.asList(str.split("\\s+"));
-            if (spam){
-                    int badNum = Integer.parseInt(elementArray.get(2));
-                    badNum ++;
-                    String newstr = elementArray.get(0) + " " + elementArray.get(1) + " " + badNum;
-                    arr.set(index, newstr);
-            }else{
-                    int goodNum = Integer.parseInt(elementArray.get(1));
-                    goodNum ++;
-                    String newstr = elementArray.get(0) + " " + goodNum + " " + elementArray.get(2); 
-                    arr.set(index, newstr);
-            }
+        int index = getWordIndex(word);
+        String str = arr.get(index);
+        List<String> elementArray = Arrays.asList(str.split("\\s+"));
+        if (spam){
+            int badNum = Integer.parseInt(elementArray.get(2));
+            badNum ++;
+            String newstr = elementArray.get(0) + " " + elementArray.get(1) + " " + badNum;
+            arr.set(index, newstr);
+        }else{
+            int goodNum = Integer.parseInt(elementArray.get(1));
+            goodNum ++;
+            String newstr = elementArray.get(0) + " " + goodNum + " " + elementArray.get(2); 
+            arr.set(index, newstr);
+        }
     }
 
     /*
@@ -179,41 +176,41 @@ public class WordBucket{
     * This method returns the number of nonspam emails the word appears in.
     */
     public static double getWordGood(String word){
-            int index = getWordIndex(word);
-            if (index == -1){
-                    return 0; 
-            }
-            String str = arr.get(index);
-            List<String> elementArray = Arrays.asList(str.split("\\s+"));
-            int temp = Integer.parseInt(elementArray.get(1));
-            return temp; 
+        int index = getWordIndex(word);
+        if (index == -1){
+            return 0; 
+        }
+        String str = arr.get(index);
+        List<String> elementArray = Arrays.asList(str.split("\\s+"));
+        int temp = Integer.parseInt(elementArray.get(1));
+        return temp; 
     }
 
     /*
     * This method returns the number of spam emails the word appears in.
     */
     public static double getWordBad(String word){
-            int index = getWordIndex(word);
-            if (index == -1){
-                    return 0; 
-            }
-            String str = arr.get(index);
-            List<String> elementArray = Arrays.asList(str.split("\\s+"));
-            int temp = Integer.parseInt(elementArray.get(2));
-            return temp; 
+        int index = getWordIndex(word);
+        if (index == -1){
+            return 0; 
+        }
+        String str = arr.get(index);
+        List<String> elementArray = Arrays.asList(str.split("\\s+"));
+        int temp = Integer.parseInt(elementArray.get(2));
+        return temp; 
     }
 
     /* 
     * This method allows the client to directly set the good and bad counts for a word. 
     */
     public static void setWordCounts(String word, int good, int bad){
-            String str = word + " " + good + " " + bad; 
-            if (getWordIndex(word) == -1){
-                    arr.add(str);
-            }else{
-                    int index = getWordIndex(word); 
-                    arr.set(index, str);
-            }
+        String str = word + " " + good + " " + bad; 
+        if (getWordIndex(word) == -1){
+            arr.add(str);
+        }else{
+            int index = getWordIndex(word); 
+            arr.set(index, str);
+        }
     }
 
     /*
@@ -221,21 +218,21 @@ public class WordBucket{
     * If the word is not found, the index is returned as -1.
     */
     public static int getWordIndex(String word){
-            for (int i = 0; i<arr.size(); i++){
-                    String str = arr.get(i);
-                    List<String> elementArray = Arrays.asList(str.split("\\s+"));
-                    if (elementArray.get(0).equals(word)){
-                        return i; 
-                    }
+        for (int i = 0; i<arr.size(); i++){
+            String str = arr.get(i);
+            List<String> elementArray = Arrays.asList(str.split("\\s+"));
+            if (elementArray.get(0).equals(word)){
+                return i; 
             }
-            return -1;
+        }
+        return -1;
     }
     
     /**
     * Sorts the arr alphabetically.  Currently unused.
     */
     public void sortArr(){
-            Collections.sort(arr);
+        Collections.sort(arr);
     }
 
 }
