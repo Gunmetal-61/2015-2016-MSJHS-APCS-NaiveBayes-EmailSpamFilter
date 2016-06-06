@@ -9,8 +9,9 @@ import java.io.File;
 import java.util.Scanner;
 
 /**
- *
- * @author Mitchell
+ * 
+ * @author Mitchell Wu, Catherine Zeng, Chris Wang
+ * 
  * APCS semester 2 project. This project implements a self-written version of the
  * Naive Bayes classifier to rudimentarily determine if an email message is spam 
  * or not spam through single word probability.
@@ -20,14 +21,16 @@ import java.util.Scanner;
  */
 public class EmailSpamFilter {
     
-    private static Scanner scanner = new Scanner(System.in);
-    private static int operation2PromptToggle = 0;
+    private static Scanner scanner = new Scanner(System.in);//Class-wide scanner which handles all user interactions on the console.
+    private static int operation2PromptToggle = 0;//part of the robustness system of method operation2().
     
     /**
+     * Everything begins here.
+     * 
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        WordBucket.readFileArr();
+        WordBucket.readFileArr();//Loads the words already classified from sample messages into an active array for testing a message for spam or adding new words from new smaple messages. 
         openingSequencePrompt();
         operationSelector();
     }
@@ -95,13 +98,12 @@ public class EmailSpamFilter {
         int operationSelector = scanner.nextInt();
         if (operationSelector == 1) {
             WordFileComposer.cleanMessagesForAnalysis(addedMessageFile, "SPAM");
-            //add wordBucket word analysis and registering here.
         } else if (operationSelector == 2) {
             WordFileComposer.cleanMessagesForAnalysis(addedMessageFile, "HAM");
-            //add wordBucket word analysis and registering here.
         } else {
             System.out.println("Invalid input.  Please answer with \"1\" or \"2\"");
             operation2();
         }
     }
+    
 }
